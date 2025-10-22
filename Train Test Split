@@ -1,0 +1,120 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPbHp85ypla/G3lSar1c5lp",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Rajeshwari07120/LOAN-STATUS-PREDICATION/blob/main/Train%20Test%20Split\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "fY2RCrDsjWHO"
+      },
+      "outputs": [],
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import seaborn as sns\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn import svm\n",
+        "from sklearn.metrics import accuracy_score"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# loading the dataset to pandas DataFrame\n",
+        "loan_dataset = pd.read_csv('/content/train_u6lujuX_CVtuZ9i (1).csv')"
+      ],
+      "metadata": {
+        "id": "FNbGXGQHjqZQ"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Train Test Split"
+      ],
+      "metadata": {
+        "id": "3TOAKNoGj1YV"
+      }
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8b32ada4"
+      },
+      "source": [
+        "# Separating the target variable from the features\n",
+        "X = loan_dataset.drop(columns=['Loan_ID','Loan_Status'],axis=1)\n",
+        "Y = loan_dataset['Loan_Status']"
+      ],
+      "execution_count": 8,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(X.shape, X_train.shape, X_test.shape)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 146
+        },
+        "id": "rhoE8ns6mDme",
+        "outputId": "18493a67-1c36-462e-b305-a8e2f7a3f0a1"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "name 'X_train' is not defined",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m/tmp/ipython-input-3806376706.py\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mX\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mX_train\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mX_test\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m: name 'X_train' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ef8eb3a8"
+      },
+      "source": [
+        "# Splitting the data into training and testing sets\n",
+        "X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size=0.2, stratify=Y, random_state=2)"
+      ],
+      "execution_count": 10,
+      "outputs": []
+    }
+  ]
+}
