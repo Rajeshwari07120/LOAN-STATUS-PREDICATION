@@ -1,0 +1,326 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyO2Vm4Ol5uJ6JG3sPZfA07D",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Rajeshwari07120/LOAN-STATUS-PREDICATION/blob/main/Model%20Evaluation\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "LxQ8ifiZx2GK"
+      },
+      "outputs": [],
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import seaborn as sns\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn import svm\n",
+        "from sklearn.metrics import accuracy_score"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# loading the dataset to pandas DataFrame\n",
+        "loan_dataset = pd.read_csv('/content/train_u6lujuX_CVtuZ9i (1).csv')"
+      ],
+      "metadata": {
+        "id": "LPFtNcbnyGcm"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# separating the data and label\n",
+        "X = loan_dataset.drop(columns=['Loan_ID','Loan_Status'],axis=1)\n",
+        "Y = loan_dataset['Loan_Status']"
+      ],
+      "metadata": {
+        "id": "mIq8UkNTzCnZ"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(X)\n",
+        "print(Y)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "51fLSLqizJoR",
+        "outputId": "584405fc-8e22-4859-edc9-edc1f9752153"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "     Gender Married Dependents     Education Self_Employed  ApplicantIncome  \\\n",
+            "0      Male      No          0      Graduate            No             5849   \n",
+            "1      Male     Yes          1      Graduate            No             4583   \n",
+            "2      Male     Yes          0      Graduate           Yes             3000   \n",
+            "3      Male     Yes          0  Not Graduate            No             2583   \n",
+            "4      Male      No          0      Graduate            No             6000   \n",
+            "..      ...     ...        ...           ...           ...              ...   \n",
+            "609  Female      No          0      Graduate            No             2900   \n",
+            "610    Male     Yes         3+      Graduate            No             4106   \n",
+            "611    Male     Yes          1      Graduate            No             8072   \n",
+            "612    Male     Yes          2      Graduate            No             7583   \n",
+            "613  Female      No          0      Graduate           Yes             4583   \n",
+            "\n",
+            "     CoapplicantIncome  LoanAmount  Loan_Amount_Term  Credit_History  \\\n",
+            "0                  0.0         NaN             360.0             1.0   \n",
+            "1               1508.0       128.0             360.0             1.0   \n",
+            "2                  0.0        66.0             360.0             1.0   \n",
+            "3               2358.0       120.0             360.0             1.0   \n",
+            "4                  0.0       141.0             360.0             1.0   \n",
+            "..                 ...         ...               ...             ...   \n",
+            "609                0.0        71.0             360.0             1.0   \n",
+            "610                0.0        40.0             180.0             1.0   \n",
+            "611              240.0       253.0             360.0             1.0   \n",
+            "612                0.0       187.0             360.0             1.0   \n",
+            "613                0.0       133.0             360.0             0.0   \n",
+            "\n",
+            "    Property_Area  \n",
+            "0           Urban  \n",
+            "1           Rural  \n",
+            "2           Urban  \n",
+            "3           Urban  \n",
+            "4           Urban  \n",
+            "..            ...  \n",
+            "609         Rural  \n",
+            "610         Rural  \n",
+            "611         Urban  \n",
+            "612         Urban  \n",
+            "613     Semiurban  \n",
+            "\n",
+            "[614 rows x 11 columns]\n",
+            "0      Y\n",
+            "1      N\n",
+            "2      Y\n",
+            "3      Y\n",
+            "4      Y\n",
+            "      ..\n",
+            "609    Y\n",
+            "610    Y\n",
+            "611    Y\n",
+            "612    Y\n",
+            "613    N\n",
+            "Name: Loan_Status, Length: 614, dtype: object\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# separating the data and label\n",
+        "X = loan_dataset.drop(columns=['Loan_ID','Loan_Status'],axis=1)\n",
+        "Y = loan_dataset['Loan_Status']\n",
+        "\n",
+        "# convert categorical columns to numerical values\n",
+        "X = pd.get_dummies(X, columns=['Gender','Married','Dependents','Education','Self_Employed','Property_Area'], drop_first=True)\n",
+        "\n",
+        "# Split the data into training and testing sets after encoding\n",
+        "X_train, X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.1,stratify=Y,random_state=2)"
+      ],
+      "metadata": {
+        "id": "Eo_DzoVgzVZR"
+      },
+      "execution_count": 20,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(X.shape, X_train.shape, X_test.shape)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-BX17PFMznAt",
+        "outputId": "4ae8bc89-78e0-43dd-c0bc-e5476dffb08e"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "(614, 11) (552, 11) (62, 11)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "classifier = svm.SVC(kernel='linear')"
+      ],
+      "metadata": {
+        "id": "LkHD1bpXzzbC"
+      },
+      "execution_count": 17,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "a6f2b883"
+      },
+      "source": [
+        "# convert categorical columns to numerical values\n",
+        "X = pd.get_dummies(X, columns=['Gender','Married','Dependents','Education','Self_Employed','Property_Area'], drop_first=True)"
+      ],
+      "execution_count": 19,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Model Evaluation"
+      ],
+      "metadata": {
+        "id": "ChJu7w-eyYdJ"
+      }
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3758a640"
+      },
+      "source": [
+        "# handle missing values by imputation (e.g., mean imputation)\n",
+        "X_train = X_train.fillna(X_train.mean())\n",
+        "X_test = X_test.fillna(X_test.mean())"
+      ],
+      "execution_count": 23,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#training the support Vector Macine model\n",
+        "classifier.fit(X_train,Y_train)\n",
+        "\n",
+        "# accuracy score on training data\n",
+        "X_train_prediction = classifier.predict(X_train)\n",
+        "training_data_accuray = accuracy_score(X_train_prediction,Y_train)\n",
+        "\n",
+        "print('Accuracy on training data : ', training_data_accuray)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-kKxKCBJ0WxL",
+        "outputId": "d6d91e63-bbb3-4501-a890-806dcf7727d6"
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy on training data :  0.7916666666666666\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "eb1986f9",
+        "outputId": "3ccb2ae6-01e4-4568-fd35-4c145559e6e0"
+      },
+      "source": [
+        "# accuracy score on test data\n",
+        "X_test_prediction = classifier.predict(X_test)\n",
+        "test_data_accuray = accuracy_score(X_test_prediction,Y_test)\n",
+        "\n",
+        "print('Accuracy on test data : ', test_data_accuray)"
+      ],
+      "execution_count": 28,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy on test data :  0.7903225806451613\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# accuracy score on training data\n",
+        "X_test_prediction = classifier.predict(X_test)\n",
+        "test_data_accuray = accuracy_score(X_test_prediction,Y_test)"
+      ],
+      "metadata": {
+        "id": "iEG_t0LR1HWu"
+      },
+      "execution_count": 29,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print('Accuracy on test data : ', test_data_accuray)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "W0J8aaHU1Jcn",
+        "outputId": "42454ef3-fd76-4eed-8497-cad79a6533f2"
+      },
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy on test data :  0.7903225806451613\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
