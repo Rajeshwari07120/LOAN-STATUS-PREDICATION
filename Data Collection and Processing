@@ -23,7 +23,7 @@
         "colab_type": "text"
       },
       "source": [
-        "<a href=\"https://colab.research.google.com/github/Rajeshwari07120/LOAN-STATUS-PREDICATION/blob/main/Untitled0.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+        "<a href=\"https://colab.research.google.com/github/Rajeshwari07120/LOAN-STATUS-PREDICATION/blob/main/Data%20Collection%20and%20Processing\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
       ]
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "cell_type": "code",
-      "execution_count": 1,
+      "execution_count": null,
       "metadata": {
         "id": "5jebM9a2ZhKA"
       },
@@ -69,7 +69,7 @@
       "metadata": {
         "id": "rEYti2WJbMKR"
       },
-      "execution_count": 2,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -85,7 +85,7 @@
         "id": "CN9s74FDbZUb",
         "outputId": "251609e3-475a-427a-b343-117588fdd559"
       },
-      "execution_count": 3,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -280,7 +280,7 @@
         "id": "IXBHjNm0bfkt",
         "outputId": "c28cd0d6-2e0b-49ee-b71a-82997dae3697"
       },
-      "execution_count": 4,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -661,7 +661,7 @@
         "id": "YDjQKJwTbsew",
         "outputId": "c146153c-aa7a-480f-e77f-d540c29c23de"
       },
-      "execution_count": 5,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -689,7 +689,7 @@
         "id": "PGK-nYGlbt6U",
         "outputId": "d3801fd9-a346-40c0-e666-1e3744726a66"
       },
-      "execution_count": 6,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -1045,7 +1045,7 @@
         "id": "lME6klZAb0Nn",
         "outputId": "f70d8643-e59b-4ae5-b0e1-430b495f437a"
       },
-      "execution_count": 7,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -1160,7 +1160,7 @@
       "metadata": {
         "id": "_r5pL_9Tb4y1"
       },
-      "execution_count": 8,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -1177,7 +1177,7 @@
         "id": "NCVgvCZcb6ZC",
         "outputId": "88a13976-ebbb-4863-f296-9ffb512d19bb"
       },
-      "execution_count": 9,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -1296,7 +1296,7 @@
         "id": "fzCPuhKub-BB",
         "outputId": "065416a2-9ede-4e0f-d460-a2a43da49201"
       },
-      "execution_count": 10,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -1322,7 +1322,7 @@
         "id": "RbvbgmVwcEsL",
         "outputId": "1556b796-5ac8-4045-da1e-7291f6438a42"
       },
-      "execution_count": 11,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -1704,7 +1704,7 @@
         "id": "afGWI9cncKpE",
         "outputId": "fe5070a6-7407-4d87-fc20-5fe91bf8f373"
       },
-      "execution_count": 12,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -1779,7 +1779,7 @@
       "metadata": {
         "id": "7QqF3K9ScO90"
       },
-      "execution_count": 13,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -1796,7 +1796,7 @@
         "id": "hN7PH5FGcSb7",
         "outputId": "071d5977-ea8a-4f8d-c547-20e314a55dfd"
       },
-      "execution_count": 14,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
